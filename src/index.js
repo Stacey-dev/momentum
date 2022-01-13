@@ -75,3 +75,20 @@ const showGreeting = () => {
   const timeOfDay = getTimeOfDayGreeting();
   greeting.innerText = `${timeOfDay}, `;
 };
+
+const setLocalStorage = () => {
+  localStorage.setItem('name', userName.value);
+  localStorage.setItem('city', city.value);
+};
+
+const getLocalStorage = () => {
+  if (localStorage.getItem('name')) {
+    userName.value = localStorage.getItem('name');
+  }
+  if (localStorage.getItem('city')) {
+    city.value = localStorage.getItem('city');
+  }
+};
+
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
