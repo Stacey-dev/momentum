@@ -1,0 +1,132 @@
+[
+	{
+		 "ru": {
+		  "text": "Великие умы обсуждают идеи. Средние умы обсуждают события. Мелкие умы обсуждают людей.",
+		  "author" : "Элеанор Рузвельт"
+	    },
+		 "en": {
+		  "text" : "Great minds discuss ideas. Average minds discuss events. Small minds discuss people.",
+      "author": "Eleanor Roosevelt"
+	  }
+  },
+  {
+	  "ru": {
+		  "text" : "Проживайте каждый день своей жизни.",
+		  "author" : "Джонатан Свифт"
+	  },
+	  "en": {
+		  "text" : "May you live all the days of your life",
+      "author": "Jonathan Swift"
+	  }
+  },
+  {
+	  "ru": {
+		  "text" : "Не позволяйте вчерашнему дню забирать слишком много у сегодняшнего.",
+		  "author" : "Уилл Роджерс"
+	  },
+	  "en": {
+	  	"text" : "Don’t let yesterday take up too much of today",
+      "author": "Will Rogers"
+	  }
+  },
+  {
+  	"ru": {
+  		"text" : "Думаете ли вы, что можете или думаете, что не можете — вы правы.",
+  		"author" : "Генри Форд"
+  	},
+  	"en": {
+  		"text" : "Whether you think you can or think you can't, you're right",
+      "author": "Henry Ford"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Невозможно быть слишком старым, чтобы поставить новую цель или обрести новую мечту.",
+  		"author" : "Клайв Стейплз Льюис" 
+  	},
+  	"en": {
+  		"text" : "You are never too old to set another goal or to dream a new dream",
+      "author": "Clive Staples Lewis"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Жизнь — как езда на велосипеде. Чтобы сохранять баланс, нужно продолжать двигаться.",
+  		"author" : "Альберт Эйнштейн"
+  	},
+  	"en": {
+  		"text" : "Life is like riding a bicycle. To keep your balance, you must keep moving",
+      "author": "Albert Einstein"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Чтобы начать, нужно перестать говорить и начать делать",
+  		"author" : "Уолт Дисней"
+  	},
+  	"en": {
+  		"text" : "The way to get started is to quit talking and begin doing",
+      "author": "Walt Disney"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Во многих неудачах люди не понимали, когда сдавались, насколько близки они были к успеху.",
+  		"author" : "Томас Эдисон"
+  	},
+  	"en": {
+  		"text" : "Many of life's failures are people who did not realize how close they were to success when they gave up.",
+      "author": "Thomas Edison"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Через 20 лет вы будете больше разочарованы тем, что вы не сделали, чем тем, что вы сделали.",
+  		"author" : "Марк Твен"
+  	},
+  	"en": {
+  		"text" : "Twenty years from now, you’ll be more disappointed by the things that you didn’t do than by the ones you did do.",
+      "author": "Mark Twain"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Чудеса случаются с теми, кто в них верит.",
+  		"author" : "Бернард Беренсон"
+  	},
+  	"en": {
+  		"text" : "Miracles happen to those who believe in them.",
+      "author": "Bernhard Berenson"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Что люди бы вам ни говорили — слова и идеи могут изменить мир.",
+  		"author" : "Робин Уильямс"
+  	},
+  	"en": {
+  		"text" : "No matter what people tell you, words and ideas can change the world",
+      "author": "Robin Williams"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Действие — основополагающий ключ к любому успеху",
+  		"author" : "Пабло Пикассо"
+  	},
+  	"en": {
+  		"text" : "Action is the foundational key to all success",
+      "author": "Pablo Picasso"
+  	}
+  },
+  {
+  	"ru": {
+  		"text" : "Люди, которым хватает безрассудства думать, что они могут изменить мир — и есть те, кто его меняют",
+  		"author" : "Стив Джобс"
+  	},
+  	"en": {
+  		"text" : "The people who are crazy enough to think they can change the world are the ones who do",
+      "author": "Steve Jobs"
+  	}
+  }
+]

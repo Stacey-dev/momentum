@@ -1,10 +1,16 @@
+const prevSlideBtn = document.querySelector('.slide-prev');
+const nextSlideBtn = document.querySelector('.slide-next');
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
 const userName = document.querySelector('.name');
 userName.setAttribute('placeholder', '[Enter name]');
+const quoteContainer = document.querySelector('.quote');
+const authorContainer = document.querySelector('.author');
+const changeQuoteBtn = document.querySelector('.change-quote');
 
 let lang = 'en';
+let randomNum;
 
 const showTime = () => {
   const date = new Date();
@@ -92,3 +98,60 @@ const getLocalStorage = () => {
 
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocalStorage);
+
+const getRandomNum = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const setBg = () => {
+  const timeOfDay = getTimeOfDay();
+  let bgNum = getRandomNum(1, 20);
+  if (bgNum < 10) {
+    bgNum = '0' + bgNum;
+  }
+  const img = new Image();
+  let src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
+  img.src = src;
+  img.onload = () => {
+    document.body.style.backgroundImage = `url(${src})`;
+  };
+};
+
+setBg();
+
+const getSlideNext = () => {
+  randomNum = getRandomNum(1, 20) + 1;
+  if (randomNum === 20) {
+    randomNum = 1;
+  }
+  setBg();
+};
+
+const getSlidePrev = () => {
+  if (githubImageBtn.classList.contains('active')) {
+    randomNum = getRandomNum(1, 20) - 1;
+    if (randomNum === 1) {
+      randomNum = 20;
+    }
+    setBg();
+  } else if (unsplashImageBtn.classList.contains('active')) {
+    getLinkToImage();
+  }
+};
+
+nextSlideBtn.addEventListener('click', getSlideNext);
+prevSlideBtn.addEventListener('click', getSlidePrev);
+
+async function getQuotes() {
+  const quotes = 'data.json';
+  const res = await fetch(quotes);
+  const data = await res.json();
+  let randomQuote = getRandomNum(0, 12);
+  quoteContainer.textContent = data[randomQuote][lang].text;
+  authorContainer.textContent = data[randomQuote][lang].author;
+}
+
+document.addEventListener('DOMContentLoaded', getQuotes);
+changeQuoteBtn.addEventListener('click', getQuotes);
