@@ -8,9 +8,32 @@ userName.setAttribute('placeholder', '[Enter name]');
 const quoteContainer = document.querySelector('.quote');
 const authorContainer = document.querySelector('.author');
 const changeQuoteBtn = document.querySelector('.change-quote');
+const weatherIcon = document.querySelector('.weather-icon');
+const weatherError = document.querySelector('.weather-error');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const windInfo = document.querySelector('.wind');
+const humidityInfo = document.querySelector('.humidity');
+const feelsLikeInfo = document.querySelector('.feels-like');
+const city = document.querySelector('.city');
+const APIKeyWeather = 'a150fbd01bc7aecac3637e5f13b26333';
 
 let lang = 'en';
 let randomNum;
+
+const translationInfo = {
+  ru: {
+    placeholderName: 'Введите имя',
+    placeholderCity: city.value,
+    // date: 'ru-RU',
+    weather: 'ru',
+  },
+  en: {
+    placeholderName: 'Enter name',
+    placeholderCity: city.value,
+    weather: 'en',
+  },
+};
 
 const showTime = () => {
   const date = new Date();
@@ -155,3 +178,67 @@ async function getQuotes() {
 
 document.addEventListener('DOMContentLoaded', getQuotes);
 changeQuoteBtn.addEventListener('click', getQuotes);
+
+async function getWeather() {
+  if (!city.value) {
+    city.value = localStorage.getItem('city');
+  }
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${APIKeyWeather}&units=metric&lang=${lang}`;
+
+  const res = await fetch(url);
+
+  if (res.ok) {
+    const data = await res.json();
+    weatherError.innerText = '';
+    weatherIcon.className = 'weather-icon owf';
+    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+    console.log(data.weather[0].id);
+    temperature.innerText = `${data.main.temp.toFixed(0)}°C`;
+    weatherDescription.innerText = data.weather[0].description;
+    windInfo.innerText = `${
+      weatherTranslation[lang].wind
+    }: ${data.wind.speed.toFixed(0)} ${weatherTranslation[lang].speedUnit}`;
+    humidityInfo.innerText = `${
+      weatherTranslation[lang].humidity
+    }: ${data.main.humidity.toFixed(0)}%`;
+    feelsLikeInfo.innerText = `${
+      weatherTranslation[lang].feelsLike
+    }: ${data.main.feels_like.toFixed(0)}°C`;
+  } else {
+    weatherError.innerText = `${weatherTranslation[lang].errorText}`;
+    weatherIcon.className = 'weather-icon owf';
+    temperature.innerText = '';
+    weatherDescription.innerText = '';
+    windInfo.innerText = '';
+    humidityInfo.innerText = '';
+    feelsLikeInfo.innerText = '';
+  }
+}
+
+const weatherTranslation = {
+  ru: {
+    wind: 'Скорость ветра',
+    speedUnit: 'м/с',
+    humidity: 'Влажность воздуха',
+    feelsLike: 'Ощущается',
+    errorText: 'Введите правильно город',
+  },
+  en: {
+    wind: 'Wind speed',
+    speedUnit: 'm/s',
+    humidity: 'Humidity',
+    feelsLike: 'Feels like',
+    errorText: 'Enter correct city name',
+  },
+};
+
+const setCity = (event) => {
+  if (event.code === 'Enter') {
+    getWeather();
+    city.blur();
+  }
+};
+
+getWeather();
+
+city.addEventListener('keypress', setCity);
