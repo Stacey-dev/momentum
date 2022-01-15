@@ -1,3 +1,10 @@
+import playList from './js/playList';
+
+const audio = new Audio();
+const playListContainer = document.querySelector('.play-list');
+const playBtn = document.querySelector('.play');
+const prevPlayBtn = document.querySelector('.play-prev');
+const nextPlayBtn = document.querySelector('.play-next');
 const prevSlideBtn = document.querySelector('.slide-prev');
 const nextSlideBtn = document.querySelector('.slide-next');
 const time = document.querySelector('.time');
@@ -20,6 +27,8 @@ const APIKeyWeather = 'a150fbd01bc7aecac3637e5f13b26333';
 
 let lang = 'en';
 let randomNum;
+let playNum = 0;
+let isPlay = false;
 
 const translationInfo = {
   ru: {
@@ -192,7 +201,6 @@ async function getWeather() {
     weatherError.innerText = '';
     weatherIcon.className = 'weather-icon owf';
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    console.log(data.weather[0].id);
     temperature.innerText = `${data.main.temp.toFixed(0)}°C`;
     weatherDescription.innerText = data.weather[0].description;
     windInfo.innerText = `${
@@ -242,3 +250,60 @@ const setCity = (event) => {
 getWeather();
 
 city.addEventListener('keypress', setCity);
+
+const playAudio = () => {
+  audio.src = playList[playNum].src;
+  audio.currentTime = 0;
+  audio.volume = 0.5;
+  if (!isPlay) {
+    isPlay = true;
+    audio.play();
+  } else {
+    isPlay = false;
+    audio.pause();
+  }
+};
+
+const toggleBtn = () => {
+  playBtn.classList.toggle('pause');
+  playAudio();
+};
+
+const playNext = () => {
+  if (playNum === playList.length - 1) {
+    playNum = 0;
+  } else {
+    playNum++;
+  }
+
+  isPlay = false;
+  playAudio();
+  playBtn.classList.add('pause');
+};
+
+const playPrev = () => {
+  if (playNum <= 0) {
+    playNum = playList.length - 1;
+  } else {
+    playNum--;
+  }
+
+  isPlay = false;
+  playAudio();
+  playBtn.classList.add('pause');
+};
+
+playBtn.addEventListener('click', toggleBtn);
+nextPlayBtn.addEventListener('click', playNext);
+prevPlayBtn.addEventListener('click', playPrev);
+
+const createPlayList = () => {
+  playList.forEach((el) => {
+    const li = document.createElement('li');
+    li.classList.add('play-item');
+    li.textContent = el.title;
+    playListContainer.appendChild(li);
+  });
+};
+
+document.addEventListener('DOMContentLoaded', createPlayList);
