@@ -11,7 +11,7 @@ const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
 const userName = document.querySelector('.name');
-userName.setAttribute('placeholder', '[Enter name]');
+// userName.setAttribute('placeholder', '[Enter name]');
 const quoteContainer = document.querySelector('.quote');
 const authorContainer = document.querySelector('.author');
 const changeQuoteBtn = document.querySelector('.change-quote');
@@ -24,6 +24,10 @@ const humidityInfo = document.querySelector('.humidity');
 const feelsLikeInfo = document.querySelector('.feels-like');
 const city = document.querySelector('.city');
 const APIKeyWeather = 'a150fbd01bc7aecac3637e5f13b26333';
+const settingsBtn = document.querySelector('.settings-btn');
+const settingsWrapper = document.querySelector('.settings__wrapper');
+const langEn = document.querySelector('.lang-en');
+const langRu = document.querySelector('.lang-ru');
 
 let lang = 'en';
 let randomNum;
@@ -34,7 +38,6 @@ const translationInfo = {
   ru: {
     placeholderName: 'Введите имя',
     placeholderCity: city.value,
-    // date: 'ru-RU',
     weather: 'ru',
   },
   en: {
@@ -43,6 +46,47 @@ const translationInfo = {
     weather: 'en',
   },
 };
+
+const showSettingsMenu = () => {
+  settingsBtn.classList.toggle('active');
+  settingsWrapper.classList.toggle('active');
+};
+
+settingsBtn.addEventListener('click', showSettingsMenu);
+
+const placeholderText = () => {
+  city.value = translationInfo[lang].placeholderCity;
+  userName.placeholder = translationInfo[lang].placeholderName;
+};
+
+placeholderText();
+
+const changeLanguageEn = () => {
+  if (langRu.classList.contains('active')) {
+    langRu.classList.remove('active');
+    langEn.classList.add('active');
+    lang = 'en';
+  }
+  showDate();
+  getWeather();
+  getQuotes();
+  placeholderText();
+};
+
+const changeLanguageRu = () => {
+  if (langEn.classList.contains('active')) {
+    langRu.classList.add('active');
+    langEn.classList.remove('active');
+    lang = 'ru';
+  }
+  showDate();
+  getWeather();
+  getQuotes();
+  placeholderText();
+};
+
+langEn.addEventListener('click', changeLanguageEn);
+langRu.addEventListener('click', changeLanguageRu);
 
 const showTime = () => {
   const date = new Date();
