@@ -28,6 +28,9 @@ const settingsBtn = document.querySelector('.settings-btn');
 const settingsWrapper = document.querySelector('.settings__wrapper');
 const langEn = document.querySelector('.lang-en');
 const langRu = document.querySelector('.lang-ru');
+const githubImageBtn = document.querySelector('.github');
+const unsplashImageBtn = document.querySelector('.unsplash');
+const APIKeyUnsplash = 'Teq0MD93_YbobK6rwYGdMY3lLqI-RqGdBO1BR-y_43o';
 
 let lang = 'en';
 let randomNum;
@@ -37,12 +40,12 @@ let isPlay = false;
 const translationInfo = {
   ru: {
     placeholderName: 'Введите имя',
-    placeholderCity: city.value,
+    placeholderCity: 'Введите город',
     weather: 'ru',
   },
   en: {
     placeholderName: 'Enter name',
-    placeholderCity: city.value,
+    placeholderCity: 'Enter city',
     weather: 'en',
   },
 };
@@ -182,27 +185,33 @@ const getRandomNum = (min, max) => {
 };
 
 const setBg = () => {
-  const timeOfDay = getTimeOfDay();
-  let bgNum = getRandomNum(1, 20);
-  if (bgNum < 10) {
-    bgNum = '0' + bgNum;
+  if (githubImageBtn.classList.contains('active')) {
+    const timeOfDay = getTimeOfDay();
+    let bgNum = getRandomNum(1, 20);
+    if (bgNum < 10) {
+      bgNum = '0' + bgNum;
+    }
+    const img = new Image();
+    let src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
+    img.src = src;
+    img.onload = () => {
+      document.body.style.backgroundImage = `url(${src})`;
+    };
   }
-  const img = new Image();
-  let src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
-  img.src = src;
-  img.onload = () => {
-    document.body.style.backgroundImage = `url(${src})`;
-  };
 };
 
 setBg();
 
 const getSlideNext = () => {
-  randomNum = getRandomNum(1, 20) + 1;
-  if (randomNum === 20) {
-    randomNum = 1;
+  if (githubImageBtn.classList.contains('active')) {
+    randomNum = getRandomNum(1, 20) + 1;
+    if (randomNum === 20) {
+      randomNum = 1;
+    }
+    setBg();
+  } else if (unsplashImageBtn.classList.contains('active')) {
+    getLinkToImage();
   }
-  setBg();
 };
 
 const getSlidePrev = () => {
@@ -294,6 +303,33 @@ const setCity = (event) => {
 getWeather();
 
 city.addEventListener('keypress', setCity);
+
+async function getLinkToImage() {
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=${APIKeyUnsplash}`;
+  const res = await fetch(url);
+
+  if (res.ok) {
+    const data = await res.json();
+    const img = new Image();
+    let src = data.urls.regular;
+    img.src = src;
+    img.onload = () => {
+      document.body.style.backgroundImage = `url(${src})`;
+    };
+  }
+}
+
+githubImageBtn.addEventListener('click', setBg);
+githubImageBtn.addEventListener('click', () => {
+  githubImageBtn.classList.add('active');
+  unsplashImageBtn.classList.remove('active');
+});
+
+unsplashImageBtn.addEventListener('click', getLinkToImage);
+unsplashImageBtn.addEventListener('click', () => {
+  githubImageBtn.classList.remove('active');
+  unsplashImageBtn.classList.add('active');
+});
 
 const playAudio = () => {
   audio.src = playList[playNum].src;
