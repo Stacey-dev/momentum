@@ -11,7 +11,6 @@ const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
 const userName = document.querySelector('.name');
-// userName.setAttribute('placeholder', '[Enter name]');
 const quoteContainer = document.querySelector('.quote');
 const authorContainer = document.querySelector('.author');
 const changeQuoteBtn = document.querySelector('.change-quote');
@@ -40,14 +39,14 @@ let isPlay = false;
 const translationInfo = {
   ru: {
     placeholderName: 'Введите имя',
-    placeholderCity: 'Введите город',
-    weather: 'ru',
+    defaultCity: 'Киев',
+    weather: 'ru'
   },
   en: {
     placeholderName: 'Enter name',
-    placeholderCity: 'Enter city',
-    weather: 'en',
-  },
+    defaultCity: 'Kiev',
+    weather: 'en'
+  }
 };
 
 const showSettingsMenu = () => {
@@ -58,7 +57,12 @@ const showSettingsMenu = () => {
 settingsBtn.addEventListener('click', showSettingsMenu);
 
 const placeholderText = () => {
-  city.value = translationInfo[lang].placeholderCity;
+  if (localStorage.getItem('city')) {
+    city.value = localStorage.getItem('city');
+  } else {
+    city.value = translationInfo[lang].defaultCity;
+  }
+
   userName.placeholder = translationInfo[lang].placeholderName;
 };
 
@@ -111,7 +115,7 @@ const showDate = () => {
       'Среда',
       'Четверг',
       'Пятница',
-      'Суббота',
+      'Суббота'
     ],
     en: [
       'Sunday',
@@ -120,14 +124,14 @@ const showDate = () => {
       'Wednesday',
       'Thursday',
       'Friday',
-      'Saturday',
-    ],
+      'Saturday'
+    ]
   };
   const realDate = new Date();
   const numberDay = realDate.getDay();
   const options = {
     month: 'long',
-    day: 'numeric',
+    day: 'numeric'
   };
   const currentDate = realDate.toLocaleDateString(
     lang === 'en' ? 'en-US' : 'ru-RU',
@@ -149,7 +153,7 @@ const getTimeOfDayGreeting = () => {
   const hours = date.getHours();
   const timeOfDay = {
     ru: ['Доброй ночи', 'Доброе утро', 'Добрый день', 'Добрый вечер'],
-    en: ['Good night', 'Good morning', 'Good afternoon', 'Good evening'],
+    en: ['Good night', 'Good morning', 'Good afternoon', 'Good evening']
   };
 
   let count = Math.floor(hours / 6);
@@ -242,9 +246,6 @@ document.addEventListener('DOMContentLoaded', getQuotes);
 changeQuoteBtn.addEventListener('click', getQuotes);
 
 async function getWeather() {
-  if (!city.value) {
-    city.value = localStorage.getItem('city');
-  }
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${APIKeyWeather}&units=metric&lang=${lang}`;
 
   const res = await fetch(url);
@@ -282,15 +283,15 @@ const weatherTranslation = {
     speedUnit: 'м/с',
     humidity: 'Влажность воздуха',
     feelsLike: 'Ощущается',
-    errorText: 'Введите правильно город',
+    errorText: 'Введите правильно город'
   },
   en: {
     wind: 'Wind speed',
     speedUnit: 'm/s',
     humidity: 'Humidity',
     feelsLike: 'Feels like',
-    errorText: 'Enter correct city name',
-  },
+    errorText: 'Enter correct city name'
+  }
 };
 
 const setCity = (event) => {
