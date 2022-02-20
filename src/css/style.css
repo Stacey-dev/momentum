@@ -274,23 +274,53 @@ body {
 }
 
 .settings__title {
-  padding-top: 10px;
+  padding-top: 20px;
+}
+
+.close-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  transform: scale(1.03);
+}
+
+.close-icon {
+  padding-top: 3px;
 }
 
 .language-btns {
-  margin: 10px 0;
+  margin: 25px 0;
 }
 
 .lang,
 .pictures-btn {
+  margin: 0 10px;
   width: 120px;
   height: 40px;
+  font-size: 16px;
   cursor: pointer;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.lang:hover,
+.pictures-btn:hover {
+  transform: scale(1.05);
 }
 
 .lang.active,
 .pictures-btn.active {
   background-color: rgb(211, 145, 145);
+  border: 1px solid rgb(211, 145, 145);
+  border-radius: 5px;
 }
 
 .settings-btn {

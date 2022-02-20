@@ -24,6 +24,7 @@ const feelsLikeInfo = document.querySelector('.feels-like');
 const city = document.querySelector('.city');
 const APIKeyWeather = 'a150fbd01bc7aecac3637e5f13b26333';
 const settingsBtn = document.querySelector('.settings-btn');
+const closeBtn = document.querySelector('.close-btn');
 const settingsWrapper = document.querySelector('.settings__wrapper');
 const langEn = document.querySelector('.lang-en');
 const langRu = document.querySelector('.lang-ru');
@@ -50,11 +51,17 @@ const translationInfo = {
 };
 
 const showSettingsMenu = () => {
-  settingsBtn.classList.toggle('active');
-  settingsWrapper.classList.toggle('active');
+  settingsBtn.classList.add('active');
+  settingsWrapper.classList.add('active');
+};
+
+const closeSettingsMenu = () => {
+  settingsBtn.classList.remove('active');
+  settingsWrapper.classList.remove('active');
 };
 
 settingsBtn.addEventListener('click', showSettingsMenu);
+closeBtn.addEventListener('click', closeSettingsMenu);
 
 const placeholderText = () => {
   if (localStorage.getItem('city')) {
