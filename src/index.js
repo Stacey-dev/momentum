@@ -1,3 +1,4 @@
+import * as APIKeys from './js/config.js';
 import playList from './js/playList';
 
 const audio = new Audio();
@@ -22,7 +23,6 @@ const windInfo = document.querySelector('.wind');
 const humidityInfo = document.querySelector('.humidity');
 const feelsLikeInfo = document.querySelector('.feels-like');
 const city = document.querySelector('.city');
-const APIKeyWeather = 'a150fbd01bc7aecac3637e5f13b26333';
 const settingsBtn = document.querySelector('.settings-btn');
 const closeBtn = document.querySelector('.close-btn');
 const settingsWrapper = document.querySelector('.settings__wrapper');
@@ -30,7 +30,6 @@ const langEn = document.querySelector('.lang-en');
 const langRu = document.querySelector('.lang-ru');
 const githubImageBtn = document.querySelector('.github');
 const unsplashImageBtn = document.querySelector('.unsplash');
-const APIKeyUnsplash = 'Teq0MD93_YbobK6rwYGdMY3lLqI-RqGdBO1BR-y_43o';
 
 let lang = 'en';
 let randomNum;
@@ -253,7 +252,7 @@ document.addEventListener('DOMContentLoaded', getQuotes);
 changeQuoteBtn.addEventListener('click', getQuotes);
 
 async function getWeather() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${APIKeyWeather}&units=metric&lang=${lang}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${APIKeys.APIKeyWeather}&units=metric&lang=${lang}`;
 
   const res = await fetch(url);
 
@@ -313,7 +312,7 @@ getWeather();
 city.addEventListener('keypress', setCity);
 
 async function getLinkToImage() {
-  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=${APIKeyUnsplash}`;
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=${APIKeys.APIKeyUnsplash}`;
   const res = await fetch(url);
 
   if (res.ok) {
