@@ -1,6 +1,6 @@
 # momentum
 
-[Demo](https://shrai-dev-momentum.netlify.app/)
+[Demo](https://stacey-dev-momentum.netlify.app/)
 
 This application was created using HTML, CSS and JS, bundler - Webpack.
 
